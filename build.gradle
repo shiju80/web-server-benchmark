@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+applicationName = "app"
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sparkjava:spark-core:2.5.5'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+}
+
+def onlyFor(task, config) {
+    gradle.taskGraph.whenReady { graph ->
+        if (graph.hasTask(task)) {
+            project.configure(project, config)
+            println('Set mainClassName for '+task.getName() +' to '+ mainClassName)
+        }
+    }
+}
+
+
+
+task testJson(dependsOn: ['clean', 'installApp']) << {
+}
+
+onlyFor(testJson) {
+    mainClassName = "com.iamplus.MainVerticle"
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}

@@ -1,25 +1,18 @@
 package com.iamplus.news;
 
-import io.vertx.core.AbstractVerticle;
-import io.vertx.core.http.HttpServer;
-import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.StaticHandler;
+import spark.Spark;
 
-public class MainVerticle extends AbstractVerticle {
+import static spark.Spark.port;
+import static spark.Spark.staticFiles;
+public class MainVerticle {
 
-    @Override
-    public void start() throws Exception {
+    public static void main(String[] args) {
 
-        HttpServer server = vertx.createHttpServer();
+        staticFiles.location("/public");
 
-        Router router = Router.router(vertx);
+        port(getHerokuAssignedPort());
 
-        router.get("/testJson").handler(new TestJsonHandler());
-        router.route().handler(StaticHandler.create("public"));
-
-        server.requestHandler(router::accept)
-                .listen(getHerokuAssignedPort());
-
+        Spark.get("/testJson",new TestJsonHandler());
 
         System.out.println("HTTP server started on Port " +getHerokuAssignedPort());
     }

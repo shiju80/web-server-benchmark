@@ -1,18 +1,21 @@
 package com.iamplus.news;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iamplus.news.model.TestJson;
-import io.vertx.core.Handler;
-import io.vertx.core.json.Json;
-import io.vertx.ext.web.RoutingContext;
+import spark.Request;
+import spark.Response;
+import spark.Route;
 
-public class TestJsonHandler implements Handler<RoutingContext> {
+public class TestJsonHandler implements Route {
+
     @Override
-    public void handle(RoutingContext routingContext) {
+    public Object handle(Request request, Response response) throws Exception {
 
         TestJson model = new TestJson();
         model.setFramework("Vertx");
         model.setValue("Hello");
 
-        routingContext.response().end(Json.encode(model));
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.writeValueAsString(model);
     }
 }
