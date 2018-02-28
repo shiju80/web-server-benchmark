@@ -13,6 +13,11 @@ public class TestJsonHandler implements Handler<RoutingContext> {
         model.setFramework("Vertx");
         model.setValue("Hello");
 
+        try {
+            Thread.sleep(Constants.DELAY);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         routingContext.response().end(Json.encode(model));
     }
 }
