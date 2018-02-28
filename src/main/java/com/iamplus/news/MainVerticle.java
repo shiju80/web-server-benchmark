@@ -23,6 +23,7 @@ public class MainVerticle {
 
         if (processBuilder.environment().get("DELAY") != null) {
             Contants.DELAY = Integer.parseInt(processBuilder.environment().get("DELAY"));
+            System.out.println("Delay = " + Contants.DELAY);
         }
 
         if (processBuilder.environment().get("PORT") != null) {
