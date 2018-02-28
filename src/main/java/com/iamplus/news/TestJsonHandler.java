@@ -12,7 +12,7 @@ public class TestJsonHandler implements Route {
     public Object handle(Request request, Response response) throws Exception {
 
         TestJson model = new TestJson();
-        model.setFramework("Vertx");
+        model.setFramework("Spark-Jetty");
         model.setValue("Hello");
 
         ObjectMapper mapper = new ObjectMapper();
