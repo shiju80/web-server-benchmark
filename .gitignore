@@ -8,6 +8,7 @@ target/
 .idea/
 maven/
 out/
+.gradle
 
 ### Eclipse ###
 
