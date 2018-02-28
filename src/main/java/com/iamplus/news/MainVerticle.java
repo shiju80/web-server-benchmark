@@ -3,6 +3,7 @@ package com.iamplus.news;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.StaticHandler;
 
 public class MainVerticle extends AbstractVerticle {
 
@@ -14,6 +15,7 @@ public class MainVerticle extends AbstractVerticle {
         Router router = Router.router(vertx);
 
         router.get("/testJson").handler(new TestJsonHandler());
+        router.route().handler(StaticHandler.create("public"));
 
         server.requestHandler(router::accept)
                 .listen(getHerokuAssignedPort());
