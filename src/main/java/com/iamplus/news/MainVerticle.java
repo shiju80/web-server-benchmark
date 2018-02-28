@@ -33,6 +33,7 @@ public class MainVerticle extends AbstractVerticle {
         }
         if (processBuilder.environment().get("DELAY") != null) {
             Constants.DELAY = Integer.parseInt(processBuilder.environment().get("DELAY"));
+            System.out.println("Delay " + Constants.DELAY);
         }
         return 8080; //return default port if heroku-port isn't set (i.e. on localhost)
     }
