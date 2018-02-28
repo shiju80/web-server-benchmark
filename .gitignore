@@ -5,7 +5,7 @@
 .vertx/
 target/
 .editorconfig
-.idea/compiler.xml
+.idea/
 maven/
 
 ### Eclipse ###
