@@ -15,7 +15,7 @@ public class TestJsonHandler implements Route {
         model.setFramework("Spark-Jetty");
         model.setValue("Hello");
 
-        Thread.sleep(400);
+        Thread.sleep(Contants.DELAY);
         ObjectMapper mapper = new ObjectMapper();
         return mapper.writeValueAsString(model);
     }
