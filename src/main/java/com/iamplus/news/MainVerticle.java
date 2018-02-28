@@ -10,6 +10,8 @@ public class MainVerticle extends AbstractVerticle {
     @Override
     public void start() throws Exception {
 
+        int port = getHerokuAssignedPort();
+
         HttpServer server = vertx.createHttpServer();
 
         Router router = Router.router(vertx);
@@ -18,7 +20,7 @@ public class MainVerticle extends AbstractVerticle {
         router.route().handler(StaticHandler.create("public"));
 
         server.requestHandler(router::accept)
-                .listen(getHerokuAssignedPort());
+                .listen(port);
 
 
         System.out.println("HTTP server started on Port " +getHerokuAssignedPort());
