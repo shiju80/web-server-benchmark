@@ -3,10 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "F5dR3/i70EhSIMZfeIV+H8/PtvM=",
-			"path": "github.com/gorilla/mux",
-			"revision": "94e7d24fd285520f3d12ae998f7fdd6b5393d453",
-			"revisionTime": "2017-02-17T19:26:16Z"
+			"checksumSHA1": "eq08pJz4K+i3qiS39A7ENDBMoF0=",
+			"path": "github.com/valyala/fasthttp",
+			"revision": "e5f51c11919d4f66400334047b897ef0a94c6f3c",
+			"revisionTime": "2017-12-07T12:09:41Z"
 		}
 	],
 	"rootPath": "helloworld"
