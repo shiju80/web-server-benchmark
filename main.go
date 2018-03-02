@@ -3,12 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"net/http"
 	"os"
 	"strconv"
 	"time"
 
-	"github.com/gorilla/mux"
+	"github.com/valyala/fasthttp"
 )
 
 var DELAY = 1000
@@ -18,7 +17,8 @@ type HelloStruct struct {
 	Value     string `json:"value"`
 }
 
-func testJSON(w http.ResponseWriter, r *http.Request) {
+// request handler in net/http style, i.e. method bound to MyHandler struct.
+func testJSON(ctx *fasthttp.RequestCtx) {
 
 	var hello HelloStruct
 
@@ -26,9 +26,10 @@ func testJSON(w http.ResponseWriter, r *http.Request) {
 	hello.Value = "Hello"
 
 	time.Sleep(time.Duration(DELAY) * time.Millisecond)
-	w.WriteHeader(200)
-	json.NewEncoder(w).Encode(hello)
 
+	ctx.SetStatusCode(fasthttp.StatusOK)
+
+	json.NewEncoder(ctx).Encode(hello)
 }
 
 func main() {
@@ -37,11 +38,16 @@ func main() {
 
 	fmt.Println("Delay = ", DELAY)
 
-	r := mux.NewRouter()
-	r.HandleFunc("/testJson", testJSON).Methods("GET")
+	// the corresponding fasthttp code
+	fasthttpRoutes := func(ctx *fasthttp.RequestCtx) {
+		switch string(ctx.Path()) {
+		case "/testJson":
+			testJSON(ctx)
+		default:
+			ctx.Error("not found", fasthttp.StatusNotFound)
+		}
+	}
 
-	staticFileHandler := http.FileServer(http.Dir("./public"))
-	r.PathPrefix("/").Handler(staticFileHandler).Methods("GET")
-
-	http.ListenAndServe(":"+os.Getenv("PORT"), r)
+	fasthttp.FSHandler("/public", 0)
+	fasthttp.ListenAndServe(":8080", fasthttpRoutes)
 }
