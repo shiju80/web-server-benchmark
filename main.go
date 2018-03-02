@@ -25,7 +25,7 @@ func testJSON(w http.ResponseWriter, r *http.Request) {
 	hello.Framework = "Go"
 	hello.Value = "Hello"
 
-	time.Sleep(time.Duration(DELAY))
+	time.Sleep(time.Duration(DELAY) * time.Millisecond)
 	w.WriteHeader(200)
 	json.NewEncoder(w).Encode(hello)
 
