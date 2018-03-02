@@ -38,16 +38,17 @@ func main() {
 
 	fmt.Println("Delay = ", DELAY)
 
+	filehandler := fasthttp.FSHandler("./public", 0)
+
 	// the corresponding fasthttp code
 	fasthttpRoutes := func(ctx *fasthttp.RequestCtx) {
 		switch string(ctx.Path()) {
 		case "/testJson":
 			testJSON(ctx)
 		default:
-			ctx.Error("not found", fasthttp.StatusNotFound)
+			filehandler(ctx)
 		}
 	}
 
-	fasthttp.FSHandler("/public", 0)
-	fasthttp.ListenAndServe(":"+os.Getenv("PORT"), fasthttpRoutes)
+	fasthttp.ListenAndServe(":8080", fasthttpRoutes)
 }
