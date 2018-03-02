@@ -50,5 +50,5 @@ func main() {
 		}
 	}
 
-	fasthttp.ListenAndServe(":8080", fasthttpRoutes)
+	fasthttp.ListenAndServe(":"+os.Getenv("PORT"), fasthttpRoutes)
 }
