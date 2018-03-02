@@ -1,0 +1,13 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "F5dR3/i70EhSIMZfeIV+H8/PtvM=",
+			"path": "github.com/gorilla/mux",
+			"revision": "94e7d24fd285520f3d12ae998f7fdd6b5393d453",
+			"revisionTime": "2017-02-17T19:26:16Z"
+		}
+	],
+	"rootPath": "helloworld"
+}
