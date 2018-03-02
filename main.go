@@ -43,5 +43,5 @@ func main() {
 	staticFileHandler := http.FileServer(http.Dir("./public"))
 	r.PathPrefix("/").Handler(staticFileHandler).Methods("GET")
 
-	http.ListenAndServe(":8080", r)
+	http.ListenAndServe(":"+os.Getenv("PORT"), r)
 }
