@@ -1,4 +1,4 @@
-var sleep = require('sleep-async')();
+const sleep = require('sleep-promise');
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 8080
@@ -12,7 +12,7 @@ express()
 
 function testJson(res){
 
-  sleep.sleep(DELAY, function() {
+  sleep(DELAY).then (function() {
     var string = "{'framework':'NodeJs', 'value':'Hello'}"
     res.send(JSON.stringify(string))
   });
