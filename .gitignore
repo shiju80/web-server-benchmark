@@ -7,6 +7,8 @@ target/
 .editorconfig
 .idea/
 maven/
+node_modules
+npm-debug.log
 
 ### Eclipse ###
 
