@@ -14,6 +14,6 @@ function testJson(res){
 
   sleep(DELAY).then (function() {
     var string = "{'framework':'NodeJs', 'value':'Hello'}"
-    res.send(JSON.stringify(string))
+    res.json(string)
   });
 }
