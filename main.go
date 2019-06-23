@@ -19,29 +19,21 @@ type HelloStruct struct {
 }
 
 func testJSON(w http.ResponseWriter, r *http.Request) {
-
 	var hello HelloStruct
-
 	hello.Framework = "Go"
 	hello.Value = "Hello"
 
 	time.Sleep(time.Duration(DELAY) * time.Millisecond)
 	w.WriteHeader(200)
 	json.NewEncoder(w).Encode(hello)
-
 }
 
 func main() {
-
 	DELAY, _ = strconv.Atoi(os.Getenv("DELAY"))
-
 	fmt.Println("Delay = ", DELAY)
-
 	r := mux.NewRouter()
-	r.HandleFunc("/testJson", testJSON).Methods("GET")
-
+	r.HandleFunc("/api/v1/hello", testJSON).Methods("GET")
 	staticFileHandler := http.FileServer(http.Dir("./public"))
 	r.PathPrefix("/").Handler(staticFileHandler).Methods("GET")
-
 	http.ListenAndServe(":"+os.Getenv("PORT"), r)
 }
